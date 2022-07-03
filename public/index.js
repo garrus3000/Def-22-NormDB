@@ -1,6 +1,6 @@
 const socket = io();
 
-
+// Productos con Fake.js vista en HBS
 fetch("/api/productos-test")
     .then((response) => response.json())
     .then((data) => listaDeProductos(data))
@@ -14,3 +14,5 @@ const listaDeProductos = (data) => {
         .then((compiled) => compiled({ productos }))
         .then( (html) => (document.getElementById("productos").innerHTML = html) );
 };
+
+// Mensajes

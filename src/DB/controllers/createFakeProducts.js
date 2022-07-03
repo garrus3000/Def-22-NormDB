@@ -7,9 +7,9 @@ const createFakeProducts = async () => {
     for (let i = 0; i < 5; i++) {
         const product = {
             id: 1 + i,
-            nombre: faker.commerce.product(),
+            nombre: faker.music.songName(),
             precio: faker.commerce.price(),
-            foto: faker.image.food(300, 200, true),
+            foto: faker.image.imageUrl("300", "300", 'Heavy Metal', true),
             stock: faker.random.numeric(3),
         }
         products.push(product);

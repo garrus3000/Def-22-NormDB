@@ -5,10 +5,10 @@ const routerProducto = Router();
 
 routerProducto.get("/productos-test", async (req, res) => {
 
-    const products = await createFakeProducts();
+    const productos = await createFakeProducts();
     
-    if (products.length > 0) res.status(200).json(products);
-    else res.status(404).send({ message: "Productos no encontrado" });
+    if (productos.length > 0) res.status(200).send(productos);
+    else res.status(404).send("No se encontraron productos");
 });
 
 export default routerProducto;
