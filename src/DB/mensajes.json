@@ -1,0 +1,38 @@
+[
+  {
+    "author": {
+      "id": "felt@fort.com",
+      "nombre": "Ricardo",
+      "apellido": "Fort",
+      "edad": "50",
+      "alias": "El comandante",
+      "avatar": "https://www.lavoz.com.ar/resizer/RgB0hyIsoEh11jYsmxxe6GUDejo=/1023x682/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/3KETMFZRI5BWZLQWHV5HW27IYA.jpg",
+      "fecha": "3/7/2022, 19:42:46"
+    },
+    "text": "Maiameeeee!"
+  },
+  {
+    "author": {
+      "id": "carpincho@tigre.com",
+      "nombre": "Carp",
+      "apellido": "Pincho",
+      "edad": "10",
+      "alias": "TerrorDelNordelta",
+      "avatar": "https://yerbamateargentina.org.ar/imagenes/archivos/noticias/79288_imagen_1227x747xrecortarxagrandar.jpg?random=1608575522",
+      "fecha": "3/7/2022, 19:52:25"
+    },
+    "text": "Vó que tajaí!"
+  },
+  {
+    "author": {
+      "id": "mate@amargo.ar",
+      "nombre": "Estancia",
+      "apellido": "Las marias",
+      "edad": "80",
+      "alias": "Rosamonte",
+      "avatar": "https://media.ambito.com/p/e0c57058744b1dd04f3cd5bb6c907d09/adjuntos/239/imagenes/039/792/0039792172/730x0/smart/mate1jpg.jpg",
+      "fecha": "3/7/2022, 20:03:49"
+    },
+    "text": "Programas sin mate es como programar sin café."
+  }
+]
