@@ -14,9 +14,9 @@ const mensajesSchema = new norm.schema.Entity('mensajes', { author: authorSchema
 const nomalizerMsj = (mensajes) => {
     const _normalizado = norm.normalize(mensajes, [mensajesSchema]);
     printMsj(_normalizado);
-        
-     const _desnormalizado = norm.denormalize(_normalizado.result, [mensajesSchema],_normalizado.entities );
-    // printMsj(_desnormalizado);
+
+    const _desnormalizado = norm.denormalize(_normalizado.result, [mensajesSchema],_normalizado.entities );
+    // printMsj(_desnormalizado); // imprime el objeto desnormalizado
 
     console.log('Length Original :', JSON.stringify(mensajes).length)
     console.log('Length Normalizado :', JSON.stringify(_normalizado).length)

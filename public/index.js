@@ -70,7 +70,7 @@ const renderMensajes = (msj) => {
     }
 };
 
-
+// Muestro por consola DEL navegador los cálculos de compresión y el porcentaje por index.html
 const textSchema = new normalizr.schema.Entity('text', {idAttribute: "id_text" });
 const authorSchema = new normalizr.schema.Entity('autores', { text: textSchema}, { idAttribute: "email" });
 const mensajesSchema = new normalizr.schema.Entity('mensajes', { author: authorSchema });
