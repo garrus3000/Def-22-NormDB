@@ -22,6 +22,9 @@ class ContenedorMensajes {
             const contenido = await fs.promises.readFile(this.fileName, "utf-8");
             try {
                 const _mensajes = JSON.parse(contenido);
+                let incrementId = _mensajes.length + 1;
+                msj.id = incrementId;
+                msj.id_text = incrementId;
                 _mensajes.push(msj);
                 fs.writeFileSync(this.fileName, JSON.stringify(_mensajes, null, 2));
             } catch (error) {

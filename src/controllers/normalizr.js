@@ -3,28 +3,27 @@ import util from 'util';
 
 
 const printMsj = (objeto) =>{
-    console.log(util.inspect(objeto, false, 12, true))
+   console.log(util.inspect(objeto, false, 12, true))
 };
 
-const textSchema = new norm.schema.Entity('text');
-const authorSchema = new norm.schema.Entity('autores', {
-    text: textSchema
-});
-const schemaMensajes = new norm.schema.Entity('mensajes', { author: authorSchema }, { idAttribute: "text" });
+// Normalizar mensajes
+const textSchema = new norm.schema.Entity('text', {idAttribute: "id_text" });
+const authorSchema = new norm.schema.Entity('autores', { text: textSchema}, { idAttribute: "email" });
+const mensajesSchema = new norm.schema.Entity('mensajes', { author: authorSchema });
 
 const nomalizerMsj = (mensajes) => {
-    const _normalizado = norm.normalize(mensajes, [schemaMensajes]);
-    const mensajeLength = JSON.stringify(_normalizado).length;
-    const lenghOriginal = JSON.stringify(mensajes).length;
-    const compresion = ((lenghOriginal - mensajeLength) / lenghOriginal * 100).toFixed(2);
-    console.log(lenghOriginal);
-    console.log(`Compresion: ${compresion}%`);
-    console.log(mensajeLength);
-    // printMsj(nomaaa);
-    // console.log(_normalizado);
-    const _desnormalizado = norm.denormalize(_normalizado.result, [schemaMensajes],_normalizado.entities );
-    // printMsj(denormalized);
-    // console.log(denormalized);
+    const _normalizado = norm.normalize(mensajes, [mensajesSchema]);
+    printMsj(_normalizado);
+        
+     const _desnormalizado = norm.denormalize(_normalizado.result, [mensajesSchema],_normalizado.entities );
+    // printMsj(_desnormalizado);
+
+    console.log('Length Original :', JSON.stringify(mensajes).length)
+    console.log('Length Normalizado :', JSON.stringify(_normalizado).length)
+    console.log('Length Desnormalizado :', JSON.stringify(_desnormalizado).length)
+
+    const compresion = ((JSON.stringify(_normalizado).length * 100)  / JSON.stringify(mensajes).length).toFixed(2);
+    console.log('Compresion :', compresion + " %");
 }
 
 export { nomalizerMsj };
