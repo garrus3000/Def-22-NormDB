@@ -16,10 +16,8 @@ const listaDeProductos = (data) => {
 };
 
 
-// Mensajes
+// Mensajes, guardados en el archivo DB/mensajes.json
 const chat = document.getElementById("enviarMensaje");
-// const botonEnviar = document.getElementById("botonEnviar");
-
 
 chat.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -35,29 +33,56 @@ chat.addEventListener("submit", async (e) => {
         },
         text: e.target.text.value,
     };
-    await socket.emit("new-message", mensaje);
+    await socket.emit("new-message", mensaje );
     e.target.text.value = "";
 });
 
- const formatoMensajes = (mensaje) => {
-    const { author, text } = mensaje;
-    return `<article> 
-                    <span class="text-primary fs-5 fw-bold">${author.id}</span>
-                    <span class="text-muted fs-6 fw-bold">${author.alias}</span>
-                    [<span class="text-brown fw-semibold">${author.fecha}</span>] :
-                    <span class="text-success fst-italic">${text}</span>
-                    <img src="${author.avatar}" alt="${author.alias}" class="rounded-circle ms-3" width="50" height="50">
-            </article>`;
+// Normalizador de mensajes, si no se copia no funciona, no entiendo los import dinámicos aveces.....
+const authorsSchema = new normalizr.schema.Entity('authors');
+const msjSchema = new normalizr.schema.Entity('mensajes', { author: authorsSchema }, { idAttribute: 'id' });
+const fileSchema = [msjSchema]
 
-};
+const renderMsj = (msj) => {
+    msj.map(el => {
+        const html = ` <article> 
+        <span class="text-primary fs-5 fw-bold">${el.author.id}</span>
+        <span class="text-muted fs-6 fw-bold">${el.author.alias}</span>
+        [<span class="text-brown fw-semibold">${el.author.fecha}</span>] :
+        <span class="text-success fst-italic">${el.text}</span>
+        <img src="${el.author.avatar}" alt="${el.author.alias}" class="rounded-circle ms-3" width="50" height="50">
+        </article>`;
+        const mensajes = document.getElementById("messages");
+        mensajes.innerHTML += html;
+    })
+}
 
-const renderMensajes = (mensajes) => {
-    const listaDeMensajes = mensajes
-        .map((mensaje) => formatoMensajes(mensaje))
-        .join("");
-    if (listaDeMensajes === "") {
-        document.getElementById("messages").innerHTML = `<div> <p class=" p-2 text-danger fs-3 text-center">No hay mensajes</p> </p>`;
-    } else document.getElementById("messages").innerHTML = listaDeMensajes;
-};
 
-socket.on("messages", (msj) => renderMensajes(msj));
+const renderCompresion = (arrMensajes, desNormMensaje) => {
+    const _compresion = document.getElementById("compresion");
+
+        // const original = JSON.stringify(originalObject);
+        // const desnorma = JSON.stringify(desnormaObject);
+        // const compresion = original.length - desnorma.length;
+        // return compresion;
+
+
+
+    const calculoDeCompr = ((JSON.stringify(arrMensajes).length / JSON.stringify(desNormMensaje).length) * 100).toFixed(2);
+    const arrLength = console.log(arrMensajes.length);
+    const desLength = console.log(desNormMensaje.result);
+    printObject(arrMensajes);
+    
+
+    // const denormMsjsLength = (JSON.stringify(desNormMensaje)).length;
+    // // const msjLength = (JSON.stringify(msj)).length;
+    // // const compresion = ((msjLength - denormMsjsLength) / msjLength * 100).toFixed(2);
+    // const compresion = (JSON.stringify(denormMsjsLength) / JSON.stringify(arrMensajes).length * 100).toFixed(2);
+    _compresion.innerHTML = `(Compresión: ${calculoDeCompr}%)`;
+}
+
+
+socket.on("messages", (mensaje) => {
+    renderMsj(mensaje);
+    const normalizedMsj = normalizr.normalize(mensaje, [msjSchema]);
+    renderCompresion(mensaje, normalizedMsj);
+});

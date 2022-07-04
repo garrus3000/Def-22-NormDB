@@ -34,5 +34,17 @@
       "fecha": "3/7/2022, 20:03:49"
     },
     "text": "Programas sin mate es como programar sin café."
+  },
+  {
+    "author": {
+      "id": "ads@asd.com",
+      "nombre": "Eduardo",
+      "apellido": "Odriozola",
+      "edad": "21",
+      "alias": "12",
+      "avatar": "https://loremflickr.com/cache/resized/65535_52162622460_c11227d1ee_300_300_nofilter.jpg",
+      "fecha": "3/7/2022, 20:23:21"
+    },
+    "text": "dsdasdasd"
   }
 ]
