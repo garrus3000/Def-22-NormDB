@@ -5,7 +5,7 @@ import routerProducto from './src/routes/routes.js';
 import ContenedorMensajes from './src/controllers/contenedorMensajes.js';
 
 const app = express();
-const httpServer = HttpServer(app)
+const httpServer = new HttpServer(app)
 const ioServer = new IOServer(httpServer)
 
 const mensajes = new ContenedorMensajes('./src/DB/mensajes.json');
@@ -19,7 +19,7 @@ app.use('/api', routerProducto);
 ioServer.on("connection", async (socket) => {
     console.log("Nuevo usuario conectado");
 
-    socket.emit("messages", await mensajes.getAll() );
+    socket.emit("messages", await mensajes.getAll());
 
     socket.on("new-message", async (msj) => {
         await mensajes.save(msj);

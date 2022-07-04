@@ -7,19 +7,19 @@
       "edad": "50",
       "alias": "El comandante",
       "avatar": "https://www.lavoz.com.ar/resizer/RgB0hyIsoEh11jYsmxxe6GUDejo=/1023x682/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/3KETMFZRI5BWZLQWHV5HW27IYA.jpg",
-      "fecha": "3/7/2022, 19:42:46"
+      "fecha": "4/7/2022, 13:07:01"
     },
     "text": "Maiameeeee!"
   },
   {
     "author": {
       "id": "carpincho@tigre.com",
-      "nombre": "Carp",
-      "apellido": "Pincho",
+      "nombre": "Carpincho",
+      "apellido": "Capibara",
       "edad": "10",
       "alias": "TerrorDelNordelta",
       "avatar": "https://yerbamateargentina.org.ar/imagenes/archivos/noticias/79288_imagen_1227x747xrecortarxagrandar.jpg?random=1608575522",
-      "fecha": "3/7/2022, 19:52:25"
+      "fecha": "4/7/2022, 13:08:19"
     },
     "text": "Vó que tajaí!"
   },
@@ -31,20 +31,44 @@
       "edad": "80",
       "alias": "Rosamonte",
       "avatar": "https://media.ambito.com/p/e0c57058744b1dd04f3cd5bb6c907d09/adjuntos/239/imagenes/039/792/0039792172/730x0/smart/mate1jpg.jpg",
-      "fecha": "3/7/2022, 20:03:49"
+      "fecha": "4/7/2022, 13:40:50"
     },
-    "text": "Programas sin mate es como programar sin café."
+    "text": "Programar sin mate es como programar sin café"
   },
   {
     "author": {
       "id": "ads@asd.com",
       "nombre": "Eduardo",
       "apellido": "Odriozola",
-      "edad": "21",
-      "alias": "12",
+      "edad": "35",
+      "alias": "Reinhardt",
       "avatar": "https://loremflickr.com/cache/resized/65535_52162622460_c11227d1ee_300_300_nofilter.jpg",
-      "fecha": "3/7/2022, 20:23:21"
+      "fecha": "4/7/2022, 13:42:19"
     },
-    "text": "dsdasdasd"
+    "text": "Buenas!!"
+  },
+  {
+    "author": {
+      "id": "asdasd@asdasd.com",
+      "nombre": "Nombre 1",
+      "apellido": "Ape 1",
+      "edad": "35",
+      "alias": "Cosme Fulanito",
+      "avatar": "https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg",
+      "fecha": "4/7/2022, 13:43:47"
+    },
+    "text": "Señores!"
+  },
+  {
+    "author": {
+      "id": "test@test.test",
+      "nombre": "TEst1",
+      "apellido": "TEST 1",
+      "edad": "333",
+      "alias": "Test",
+      "avatar": "https://static.wikia.nocookie.net/skydoms/images/3/31/Fighter_0209.jpg",
+      "fecha": "4/7/2022, 15:02:37"
+    },
+    "text": "test!!!"
   }
 ]

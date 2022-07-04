@@ -1,5 +1,6 @@
 const socket = io();
 
+
 // Productos con Fake.js vista en HBS
 fetch("/api/productos-test")
     .then((response) => response.json())
@@ -37,11 +38,6 @@ chat.addEventListener("submit", async (e) => {
     e.target.text.value = "";
 });
 
-// Normalizador de mensajes, si no se copia no funciona, no entiendo los import dinámicos aveces.....
-const authorsSchema = new normalizr.schema.Entity('authors');
-const msjSchema = new normalizr.schema.Entity('mensajes', { author: authorsSchema }, { idAttribute: 'id' });
-const fileSchema = [msjSchema]
-
 const renderMsj = (msj) => {
     msj.map(el => {
         const html = ` <article> 
@@ -49,40 +45,35 @@ const renderMsj = (msj) => {
         <span class="text-muted fs-6 fw-bold">${el.author.alias}</span>
         [<span class="text-brown fw-semibold">${el.author.fecha}</span>] :
         <span class="text-success fst-italic">${el.text}</span>
-        <img src="${el.author.avatar}" alt="${el.author.alias}" class="rounded-circle ms-3" width="50" height="50">
+        <img src="${el.author.avatar}" alt="${el.author.alias}" class="rounded-circle ms-3" width="75" height="75">
         </article>`;
         const mensajes = document.getElementById("messages");
         mensajes.innerHTML += html;
     })
 }
 
+// Esquemas de normalizacion para ver en consola del navegador
+const textSchema = new normalizr.schema.Entity('text');
+const authorSchema = new normalizr.schema.Entity('autores', {
+    text: textSchema
+});
+const schemaMensajes = new normalizr.schema.Entity('mensajes', { author: authorSchema }, { idAttribute: "text" });
 
-const renderCompresion = (arrMensajes, desNormMensaje) => {
+const renderCompresion = (msj) => {
+    const _normalizado = normalizr.normalize(msj, [schemaMensajes]);
+    console.log(_normalizado);
+    const _desnormalizado = normalizr.denormalize(_normalizado.result, [schemaMensajes],_normalizado.entities );
+    console.log(_desnormalizado);
+    console.log('Length original :', JSON.stringify(msj).length)
+    console.log('Length normalizado :', JSON.stringify(_normalizado).length)
+    console.log('Length desnormalizado :', JSON.stringify(_desnormalizado).length)
+    const compresion = ((JSON.stringify(msj).length / JSON.stringify(_normalizado).length) * 100).toFixed(2);
+    console.log('Compresion :', compresion);
     const _compresion = document.getElementById("compresion");
-
-        // const original = JSON.stringify(originalObject);
-        // const desnorma = JSON.stringify(desnormaObject);
-        // const compresion = original.length - desnorma.length;
-        // return compresion;
-
-
-
-    const calculoDeCompr = ((JSON.stringify(arrMensajes).length / JSON.stringify(desNormMensaje).length) * 100).toFixed(2);
-    const arrLength = console.log(arrMensajes.length);
-    const desLength = console.log(desNormMensaje.result);
-    printObject(arrMensajes);
-    
-
-    // const denormMsjsLength = (JSON.stringify(desNormMensaje)).length;
-    // // const msjLength = (JSON.stringify(msj)).length;
-    // // const compresion = ((msjLength - denormMsjsLength) / msjLength * 100).toFixed(2);
-    // const compresion = (JSON.stringify(denormMsjsLength) / JSON.stringify(arrMensajes).length * 100).toFixed(2);
-    _compresion.innerHTML = `(Compresión: ${calculoDeCompr}%)`;
+    _compresion.innerHTML = `Compresion: ${compresion}%`;
 }
 
-
-socket.on("messages", (mensaje) => {
+socket.on("messages",  (mensaje) => {
     renderMsj(mensaje);
-    const normalizedMsj = normalizr.normalize(mensaje, [msjSchema]);
-    renderCompresion(mensaje, normalizedMsj);
+    renderCompresion(mensaje);
 });
