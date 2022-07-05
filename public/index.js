@@ -80,9 +80,9 @@ const mensajesSchema = new normalizr.schema.Entity('mensajes', { author: authorS
 
 const renderCompresion = (msj) => {
     const _normalizado = normalizr.normalize(msj, [mensajesSchema]);
-    console.log(_normalizado);
+    console.log("Normalizado :", _normalizado);
     const _desnormalizado = normalizr.denormalize(_normalizado.result, [mensajesSchema],_normalizado.entities );
-    console.log(_desnormalizado);
+    console.log("Desnormalizado :",_desnormalizado);
 
     console.log('Length Original :', JSON.stringify(msj).length)
     console.log('Length Normalizado :', JSON.stringify(_normalizado).length)

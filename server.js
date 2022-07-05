@@ -13,7 +13,7 @@ const ioServer = new IOServer(httpServer)
 
 const mensajes = new ContenedorMensajes('./src/DB/mensajes.json');
 
-app.use(express.static('public'));
+app.use("/api",express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,6 +33,13 @@ ioServer.on("connection", async (socket) => {
     });
 });
 
+
+app.use((req, res) => {
+    res.status(404).send({
+        error: -2,
+        descripcion: `ruta ${req.originalUrl} y metodo ${req.method} no implementada`,
+    });
+});
 
 
 const PORT = 8080;
