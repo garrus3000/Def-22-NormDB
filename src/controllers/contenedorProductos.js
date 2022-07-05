@@ -9,7 +9,7 @@ const createFakeProducts = async () => {
             id: 1 + i,
             nombre: faker.music.songName(),
             precio: faker.commerce.price(),
-            foto: faker.image.imageUrl("300", "300", 'Heavy Metal', true),
+            foto: faker.image.imageUrl("300", "300", 'Music', true),
             stock: faker.random.numeric(3),
         }
         products.push(product);
